@@ -22,7 +22,7 @@ print(answer)
 
 # b = M // (K+1)
 # a = M - b
-# answer2 = a*array[0] + b*array[1]
+# answer2 = a * array[0] + b * array[1]
 # print(answer2)
 
 
