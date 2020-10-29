@@ -1,1 +1,2 @@
-print("a".zfill(4))
+num = input()
+print(float(num))
