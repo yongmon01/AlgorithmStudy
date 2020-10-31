@@ -1,2 +1,3 @@
-num = input()
-print(float(num))
+num = int(input())
+num = -num  # wow..
+print(num)
