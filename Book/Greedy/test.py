@@ -1,5 +1,18 @@
-for i in range(10):
-    print(i)
-    for j in range(3):
-        if i == 5:
-            i = 7
+# 1 2 2 2 3
+# 1 2 3 4
+
+n = int(input())
+people = list(map(int, input().split()))
+people.sort()
+
+answer = 0
+count = 0
+
+for i in people:
+    count += 1
+    if count >= i:
+        answer += 1
+        count = 0
+
+
+print(answer)
