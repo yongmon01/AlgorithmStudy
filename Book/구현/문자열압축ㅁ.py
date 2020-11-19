@@ -4,9 +4,9 @@ min_length = n
 
 for i in range(1, n//2 + 1):
     word_list = []
-    for j in range(0, n-n%i, i):
+    for j in range(0, n-n % i, i):
         word_list.append(input_string[j:j+i])
-    word_list.append(input_string[n-n%i:])
+    word_list.append(input_string[n-n % i:])
     word_list.append(None)
     prev = None
     count = 1
