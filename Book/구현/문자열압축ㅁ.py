@@ -23,3 +23,24 @@ for i in range(1, n//2 + 1):
     min_length = min(min_length, len(return_string))
 
 print(min_length)
+
+
+# def solution(s):
+#     answer = len(s)
+#     for i in range(1, len(s)//2+1):
+#         prev = s[0:i]
+#         count = 1
+#         return_str = ""
+#         for j in range(i, len(s), i):
+#             current_str = s[j:j+i]
+#             if current_str == prev:
+#                 count += 1
+#             else:
+#                 return_str += str(count) + prev if count >= 2 else prev
+#                 prev = current_str
+#                 count = 1
+#         return_str += str(count) + prev if count >= 2 else prev
+#         answer = min(answer, len(return_str))
+#     return answer
+#
+# solution('abababz')
