@@ -1,23 +1,27 @@
-n, m = map(int, input().split())
-graph = []
-for i in range(n):
-    graph.append(list(map(int, input())))
+n = 2
+number = 12
 
-def dfs(graph, x, y):
-    if x <= -1 or x >= n or y <= -1 or y >= m:
-        return False
-    if graph[x][y] == 0:
-        graph[x][y] = 1
-        dfs(graph, x - 1, y)
-        dfs(graph, x + 1, y)
-        dfs(graph, x, y + 1)
-        dfs(graph, x, y - 1)
-        return True
-    return False
+def solution(N, number):
+    if N == number:
+        return 1
+    possible_list = [{}, {N}]
+    for i in range(2, 9):
+        new_set = {int(str(N) * i)}
+        for j in range(1, i//2+1):
+            for p in possible_list[j]:
+                for q in possible_list[i-j]:
+                    new_set.add(p + q)
+                    new_set.add(p - q)
+                    new_set.add(q - p)
+                    new_set.add(p * q)
+                    if q != 0:
+                        new_set.add(p // q)
+                    if p != 0:
+                        new_set.add(q // p)
+        if number in new_set:
+            return i
+        possible_list.append(new_set)
+    return -1
 
-answer = 0
-for i in range(n):
-    for j in range(m):
-        if dfs(graph, i, j) is True:
-            answer += 1
-print(answer)
+print(solution(2,11))
+print(solution(5,12))

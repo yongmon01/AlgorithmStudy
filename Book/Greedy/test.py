@@ -1,37 +1,88 @@
-from collections import deque
-import sys
+def solution(N, number):
+    sol = [0, {N}]
+    if N == number:
+        return 1
+    for i in range(2, 9):
+        sett = {int(str(N) * i)}
+        for q in range(1, i // 2 + 1):
+            for j in sol[q]:
+                for k in sol[i - q]:
+                    sett.add(j + k)
+                    sett.add(j - k)
+                    sett.add(k - j)
+                    sett.add(j * k)
+                    if j != 0:
+                        sett.add(k // j)
+                    if k != 0:
+                        sett.add(j // k)
+        if number in sett:
+            return i
+        sol.append(sett)
 
-input = sys.stdin.readline
-n, m, k, x = map(int, input().split())
-# 도시개수 도로개수 거리 출발지점
+    return -1
 
-long = [-1] * (n+1)
-graph = [[] for _ in range(n+1)]
 
-for i in range(m):
-    a, b = map(int, input().split())
-    graph[a].append(b)
+# BOJ에서는 [언어]를 PyPy3로 설정하여 제출해주세요.
 
-queue = deque()
-queue.append(x)
-long[x] = 0
-while queue:
-    v = queue.popleft()
-    for i in graph[v]:
-        if long[i] == -1:
-            long[i] = long[v] + 1
-            queue.append(i)
-#print('long: ',long)
+n, m = map(int, input().split())
+data = [] # 초기 맵 리스트
+temp = [[0] * m for _ in range(n)] # 벽을 설치한 뒤의 맵 리스트
 
-printed = False
-for i in range(len(long)):
-    if long[i] == k:
-        print(i)
-        printed = True
-if printed == False:
-    print(-1)
-# 4 4 3 1
-# 1 2
-# 1 3
-# 2 3
-# 2 4
+for _ in range(n):
+    data.append(list(map(int, input().split())))
+
+# 4가지 이동 방향에 대한 리스트
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
+result = 0
+
+# 깊이 우선 탐색(DFS)을 이용해 각 바이러스가 사방으로 퍼지도록 하기
+def virus(x, y):
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        # 상, 하, 좌, 우 중에서 바이러스가 퍼질 수 있는 경우
+        if nx >= 0 and nx < n and ny >= 0 and ny < m:
+            if temp[nx][ny] == 0:
+                # 해당 위치에 바이러스 배치하고, 다시 재귀적으로 수행
+                temp[nx][ny] = 2
+                virus(nx, ny)
+
+# 현재 맵에서 안전 영역의 크기 계산하는 메서드
+def get_score():
+    score = 0
+    for i in range(n):
+        for j in range(m):
+            if temp[i][j] == 0:
+                score += 1
+    return score
+
+# 깊이 우선 탐색(DFS)을 이용해 울타리를 설치하면서, 매 번 안전 영역의 크기 계산
+def dfs(count):
+    global result
+    # 울타리가 3개 설치된 경우
+    if count == 3:
+        for i in range(n):
+            for j in range(m):
+                temp[i][j] = data[i][j]
+        # 각 바이러스의 위치에서 전파 진행
+        for i in range(n):
+            for j in range(m):
+                if temp[i][j] == 2:
+                    virus(i, j)
+        # 안전 영역의 최대값 계산
+        result = max(result, get_score())
+        return
+    # 빈 공간에 울타리를 설치
+    for i in range(n):
+        for j in range(m):
+            if data[i][j] == 0:
+                data[i][j] = 1
+                count += 1
+                dfs(count)
+                data[i][j] = 0
+                count -= 1
+
+dfs(0)
+print(result)
