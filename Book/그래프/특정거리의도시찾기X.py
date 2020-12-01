@@ -1,3 +1,4 @@
+
 from collections import deque
 
 n, m, k, x = map(int, input().split())
@@ -58,12 +59,40 @@ else:
 
 
 
-
-
-
-
-
-
+# # 아니 이건 대체왜 아니지 답이???
+# from collections import deque
+#
+# n, m, k, x = map(int, input().split())
+# graph = [[] for _ in range(n+1)]
+# for i in range(m):
+#     a, b = map(int, input().split())
+#     graph[a].append(b)
+#
+# distance = [0] * (n+1)
+#
+# def bfs(graph, v):
+#     queue = deque()
+#     queue.append(v)
+#     for i in range(k):
+#         length = len(queue)
+#         if length == 0:
+#             print(-1)
+#             return
+#         for j in range(length):
+#             current = queue.popleft()
+#             d = distance[current]
+#             for q in graph[current]:
+#                 if distance[q] == 0:
+#                     queue.append(q)
+#                     distance[q] = d + 1
+#     if len(queue) == 0:
+#         print(-1)
+#         return
+#     for i in queue:
+#         print(i)
+#
+# bfs(graph, x)
+# # print(distance)
 
 
 
