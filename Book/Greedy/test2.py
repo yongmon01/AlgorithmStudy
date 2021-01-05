@@ -1,27 +1,27 @@
-import heapq
+from itertools import permutations
 
-def solution(food_times, k):
-    # 전체 음식을 먹는 시간보다 k가 크거나 같다면 -1
-    if sum(food_times) <= k:
+def solution(n, weak, dist):
+    # 길이를 2배로 늘려서 '원형'을 일자 형태로 변형
+    length = len(weak)
+    for i in range(length):
+        weak.append(weak[i] + n)
+    answer = len(dist) + 1 # 투입할 친구 수의 최솟값을 찾아야 하므로 len(dist) + 1로 초기화
+    # 0부터 length - 1까지의 위치를 각각 시작점으로 설정
+    for start in range(length):
+        # 친구를 나열하는 모든 경우 각각에 대하여 확인
+        for friends in list(permutations(dist, len(dist))):
+            count = 1 # 투입할 친구의 수
+            # 해당 친구가 점검할 수 있는 마지막 위치
+            position = weak[start] + friends[count - 1]
+            # 시작점부터 모든 취약한 지점을 확인
+            for index in range(start, start + length):
+                # 점검할 수 있는 위치를 벗어나는 경우
+                if position < weak[index]:
+                    count += 1 # 새로운 친구를 투입
+                    if count > len(dist): # 더 투입이 불가능하다면 종료
+                        break
+                    position = weak[index] + friends[count - 1]
+            answer = min(answer, count) # 최솟값 계산
+    if answer > len(dist):
         return -1
-
-    # 시간이 작은 음식부터 빼야 하므로 우선순위 큐를 이용
-    q = []
-    for i in range(len(food_times)):
-        # (음식 시간, 음식 번호) 형태로 우선순위 큐에 삽입
-        heapq.heappush(q, (food_times[i], i + 1))
-
-    sum_value = 0 # 먹기 위해 사용한 시간
-    previous = 0 # 직전에 다 먹은 음식 시간
-    length = len(food_times) # 남은 음식의 개수
-
-    # sum_value + (현재의 음식 시간 - 이전 음식 시간) * 현재 음식 개수와 k 비교
-    while sum_value + ((q[0][0] - previous) * length) <= k:
-        now = heapq.heappop(q)[0]
-        sum_value += (now - previous) * length
-        length -= 1 # 다 먹은 음식 제외
-        previous = now # 이전 음식 시간 재설정
-
-    # 남은 음식 중에서 몇 번째 음식인지 확인하여 출력
-    result = sorted(q, key=lambda x: x[1]) # 음식의 번호 기준으로 정렬
-    return result[(k - sum_value) % length][1]
+    return answer
