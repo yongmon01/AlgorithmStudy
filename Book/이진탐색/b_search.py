@@ -1,6 +1,6 @@
-import sys
-input_data = sys.stdin.readline().rstrip()
-print(input_data.split())
+# import sys
+# input_data = sys.stdin.readline().rstrip()
+# print(input_data.split())
 
 def b_search(li, start, end, target):
     if start >= end:
@@ -13,7 +13,7 @@ def b_search(li, start, end, target):
     else:
         return b_search(li, middle+1, end, target)
 
-li = [1,2,3,4,5,6,7,8,9,10]
-print(b_search(li, 0, len(li)-1, 8))
+li = [1,1,2,2,2,2,3]
+print(b_search(li, 0, len(li)-1, 2))
 
 
