@@ -1,29 +1,33 @@
-# 집의 개수(N)와 공유기의 개수(C)를 입력 받기
-n, c = list(map(int, input().split(' ')))
+from collections import deque
+# 도시개수, 도로개수, 거리, 출발
+n,m,k,x = map(int, input().split())
 
-# 전체 집의 좌표 정보를 입력 받기
-array = []
-for _ in range(n):
-    array.append(int(input()))
-array.sort() # 이진 탐색 수행을 위해 정렬 수행
+graph = [[] for _ in range(n+1)]
+visited = [False] * (n+1)
+length = [0] * (n+1)
 
-start = 1 # 가능한 최소 거리(min gap)
-end = array[-1] - array[0] # 가능한 최대 거리(max gap)
-result = 0
+for i in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
 
-while (start <= end):
-    mid = (start + end) // 2
-    count = 1
-    value = array[0]
+print(graph)
+queue = deque([x])
+count = 1
+length[x] = 0
+visited[x] = True
+while queue:
+    p = queue.popleft()
+    for i in graph[p]:
+        if visited[i] is False:
+            visited[i] = True
+            length[i] = length[p] + 1
+            queue.append(i)
 
-    for i in range(1, n):
-        if array[i] >= value + mid:
-            value = array[i]
-            count += 1
+print(length)
 
-    if count >= c:
-        result = mid
-        start = mid + 1
-    else:
-        end = mid - 1
-print(result)
+if k not in length:
+    print(-1)
+else:
+    for i in range(len(length)):
+        if length[i] == k:
+            print(i)
