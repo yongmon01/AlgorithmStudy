@@ -1,3 +1,7 @@
+# 아 맞았다... 난 틀리지않았어..
+# input = sys.stdin.readline 안 넣으면 무조건 시간초과
+import sys
+input = sys.stdin.readline
 # 도시개수, 도로개수, 거리, 출발
 n,m,k,x = map(int, input().split())
 
@@ -8,13 +12,13 @@ for i in range(m):
     a, b = map(int, input().split())
     graph[a].append(b)
 
-answer = graph[x]
-for a in answer:
-    visited[a] = True
+visited[x] = True
+
 print('graph',graph)
 print('visited',visited)
-print('answer',answer)
-for i in range(k-1):
+# print('answer',answer)
+answer = [x]
+for i in range(k):
     print(answer)
     new_answer = []
     for a in answer:
