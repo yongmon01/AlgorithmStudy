@@ -1,33 +1,18 @@
-from collections import deque
-# 도시개수, 도로개수, 거리, 출발
-n,m,k,x = map(int, input().split())
+# 최소 편집 거리(Edit Distance) 계산을 위한 다이나믹 프로그래밍
+def edit_dist(str1, str2):
+    n = len(str1)
+    m = len(str2)
 
-graph = [[] for _ in range(n+1)]
-visited = [False] * (n+1)
-length = [0] * (n+1)
+    # 다이나믹 프로그래밍을 위한 2차원 DP 테이블 초기화
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
 
-for i in range(m):
-    a, b = map(int, input().split())
-    graph[a].append(b)
+    # DP 테이블 초기 설정
+    for i in range(1, n + 1):
+        dp[i][0] = i
+    for j in range(1, m + 1):
+        dp[0][j] = j
+    print(dp)
 
-print(graph)
-queue = deque([x])
-count = 1
-length[x] = 0
-visited[x] = True
-while queue:
-    p = queue.popleft()
-    for i in graph[p]:
-        if visited[i] is False:
-            visited[i] = True
-            length[i] = length[p] + 1
-            queue.append(i)
-
-print(length)
-
-if k not in length:
-    print(-1)
-else:
-    for i in range(len(length)):
-        if length[i] == k:
-            print(i)
+str1 = "sunday"
+str2 = "saturday"
+edit_dist(str1, str2)
