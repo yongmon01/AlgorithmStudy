@@ -22,3 +22,22 @@ def solution(money):
 
 money = [1,2,3]
 print(solution(money))
+
+
+# 답은 맞는듯하나 시간초과 ㅠㅠ
+# def solution(money):
+#     # 첫번째 선택
+#     answer1 = choice(money, 2, len(money)-1, money[0])
+#     # 마지막 선택
+#     answer2 = choice(money,1,len(money)-2,money[-1])
+#     # 첫번째 마지막 둘다 선택 안함
+#     answer3 = choice(money, 1, len(money)-1, 0)
+#     return max(answer1, answer2, answer3)
+#
+# def choice(money, i, n, max_money):
+#     if i >= n:
+#         return max_money
+#     return max(choice(money, i+2, n, max_money+money[i]), choice(money, i+1, n, max_money))
+#
+# money = [1,2,3,1]
+# print(solution(money))
