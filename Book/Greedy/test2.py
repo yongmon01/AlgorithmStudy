@@ -1,46 +1,110 @@
-from collections import deque
+import sys
+import heapq
+input = sys.stdin.readline
+INF = int(1e9)
 
-n, k = map(int, input().split())
+n = int(input())
+m = int(input())
 
-graph = []  # 전체 보드 정보를 담는 리스트
-data = []  # 바이러스에 대한 정보를 담는 리스트
+graph = [[INF]*(n+1) for _ in range(n+1)]
 
-for i in range(n):
-    # 보드 정보를 한 줄 단위로 입력
-    graph.append(list(map(int, input().split())))
-    for j in range(n):
-        # 해당 위치에 바이러스가 존재하는 경우
-        if graph[i][j] != 0:
-            # (바이러스 종류, 시간, 위치 X, 위치 Y) 삽입
-            data.append((graph[i][j], 0, i, j))
+for a in range(1, n + 1):
+    for b in range(1, n + 1):
+        if a == b:
+            graph[a][b] = 0
+
+for i in range(m):
+    # a 에서 b로 가는 비용 c
+    a, b, c = map(int, input().split())
+    graph[a][b] = c
+
+for k in range(1, n + 1):
+    for i in range(1, n + 1):
+        for j in range(1, n + 1):
+            if graph[i][j] > graph[i][k] + graph[k][j]:
+                graph[i][j] = graph[i][k] + graph[k][j]
 print(graph)
-print(data)
 
-# 정렬 이후에 큐로 옮기기 (낮은 번호의 바이러스가 먼저 증식하므로)
-data.sort()
-q = deque(data)
 
-target_s, target_x, target_y = map(int, input().split())
 
-# 바이러스가 퍼져나갈 수 있는 4가지의 위치
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
 
-# 너비 우선 탐색(BFS) 진행
-while q:
-    virus, s, x, y = q.popleft()
-    # 정확히 s초가 지나거나, 큐가 빌 때까지 반복
-    if s == target_s:
-        break
-    # 현재 노드에서 주변 4가지 위치를 각각 확인
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        # 해당 위치로 이동할 수 있는 경우
-        if 0 <= nx and nx < n and 0 <= ny and ny < n:
-            # 아직 방문하지 않은 위치라면, 그 위치에 바이러스 넣기
-            if graph[nx][ny] == 0:
-                graph[nx][ny] = virus
-                q.append((virus, s + 1, nx, ny))
 
-print(graph[target_x - 1][target_y - 1])
+
+# import sys
+# import heapq
+# input = sys.stdin.readline
+# INF = int(1e9)
+#
+# n, m = map(int, input().split())
+# start = int(input())
+# graph = [[] for _ in range(n+1)]
+# visited = [False] * (n+1)
+# distance = [INF] * (n+1)
+#
+# for i in range(m):
+#     # a 에서 b로 가는 비용 c
+#     a, b, c = map(int, input().split())
+#     graph[a].append((b, c))
+#
+# queue = []
+# distance[start] = 0
+# heapq.heappush(queue, (0, start))
+# while queue:
+#     dist, now = heapq.heappop(queue)
+#
+#     if distance[now] < dist:
+#         continue
+#
+#     for i in graph[now]:
+#         if distance[i[0]] > i[1] + distance[now]:
+#             distance[i[0]] = i[1] + distance[now]
+#             heapq.heappush(queue, (distance[i[0]], i[0]))
+#
+# print(distance)
+
+
+
+
+
+
+
+# import sys
+# input = sys.stdin.readline
+# INF = int(1e9)
+#
+# n, m = map(int, input().split())
+# start = int(input())
+# graph = [[] for _ in range(n+1)]
+# visited = [False] * (n+1)
+# distance = [INF] * (n+1)
+#
+# for i in range(m):
+#     # a 에서 b로 가는 비용 c
+#     a, b, c = map(int, input().split())
+#     graph[a].append((b, c))
+#
+# def return_next_index():
+#     min_dist = INF
+#     index = 1
+#     for i in range(1, n+1):
+#         if visited[i] is False and distance[i] < min_dist:
+#             min_dist = distance[i]
+#             index = i
+#     return index
+#
+#
+# def dijkstra(start):
+#     visited[start] = True
+#     distance[start] = 0
+#     for node in graph[start]:
+#         distance[node[0]] = node[1]
+#     for _ in range(n-1): # n?
+#         index = return_next_index()
+#         print(index)
+#         visited[index] = True
+#         for node in graph[index]:
+#             if distance[node[0]] > distance[index] + node[1]:
+#                 distance[node[0]] = distance[index] + node[1]
+#
+# dijkstra(1)
+# print(distance)
