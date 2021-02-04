@@ -35,6 +35,7 @@ for a in range(1, n + 1):
             print(graph[a][b], end=" ")
     print()
 
+
 # 4
 # 7
 # 1 2 4
