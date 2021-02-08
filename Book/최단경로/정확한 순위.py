@@ -1,32 +1,32 @@
-# # 이렇게 bfs로 풀어봤는데 이것도 맞는것같아
-#
-# from collections import deque
-# n, m = map(int, input().split())
-#
-# graph = [[] for _ in range(n+1)]
-# for i in range(1, n+1):
-#     a, b = map(int, input().split())
-#     graph[a].append(b)
-#
-# path_list = [[]]
-# visited = [False] * (n+1)
-# answer = 0
-#
-# def bfs(node):
-#     path = []
-#     queue = deque()
-#     queue.append(node)
-#     visited[node] = True
-#     while queue:
-#         next_node = queue.popleft()
-#         path.append(next_node)
-#         for nod in graph[next_node]:
-#             if visited[nod] is False:
-#                 queue.append(nod)
-#                 visited[nod] = True
-#     for i in range(1, n+1):
-#         visited[i] = False
-#     return path
+# 이렇게 bfs로 풀어봤는데 이것도 맞는것같아
+
+from collections import deque
+n, m = map(int, input().split())
+
+graph = [[] for _ in range(n+1)]
+for i in range(1, n+1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+
+path_list = [[]]
+visited = [False] * (n+1)
+answer = 0
+
+def bfs(node):
+    path = []
+    queue = deque()
+    queue.append(node)
+    visited[node] = True
+    while queue:
+        next_node = queue.popleft()
+        path.append(next_node)
+        for nod in graph[next_node]:
+            if visited[nod] is False:
+                queue.append(nod)
+                visited[nod] = True
+    for i in range(1, n+1):
+        visited[i] = False
+    return path
 #
 # for i in range(1, n+1):
 #     current = bfs(i)
