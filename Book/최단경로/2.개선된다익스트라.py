@@ -1,3 +1,44 @@
+# import heapq
+# INF = int(1e9)
+# #노드수 간선수
+# n, m = map(int, input().split())
+# distance = [INF] * (n+1)
+# start = int(input())
+# graph = [[] for _ in range(n+1)]
+# for _ in range(m):
+#     a, b, c = map(int, input().split())
+#     graph[a].append((b, c))
+# print(graph)
+#
+# def dijkstra():
+#     queue = []
+#     heapq.heappush(queue, (0,start))
+#     distance[start] = 0
+#
+#     while queue:
+#         length, nod = heapq.heappop(queue)
+#         for i in graph[nod]:
+#             # if i[1] + length < distance[i[0]]:
+#             if i[1] + distance[nod] < distance[i[0]]:
+#                 distance[i[0]] = i[1] + distance[nod]
+#                 heapq.heappush(queue,(distance[i[0]], i[0]))
+# dijkstra()
+# print(distance)
+
+# 6 11
+# 1
+# 1 2 2
+# 1 3 5
+# 1 4 1
+# 2 3 3
+# 2 4 2
+# 3 2 3
+# 3 6 5
+# 4 3 3
+# 4 5 1
+# 5 3 1
+# 5 6 2
+
 import heapq
 import sys
 input = sys.stdin.readline
@@ -28,6 +69,7 @@ def dijkstra(start):
         dist, now = heapq.heappop(q)
         # 현재 노드가 이미 처리된 적이 있는 노드라면 무시
         if distance[now] < dist:
+            print(dist, now, distance[now])
             continue
         # 현재 노드와 연결된 다른 인접한 노드들을 확인
         for i in graph[now]:
