@@ -9,3 +9,4 @@ for i in need:
     else:
         print('NO', end=' ')
 
+
