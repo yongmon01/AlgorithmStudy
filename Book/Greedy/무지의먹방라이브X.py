@@ -1,5 +1,5 @@
 import heapq
-food_times, k = [3, 1, 2], 5
+food_times, k = [2,3,3,5], 12
 
 if sum(food_times) <= k:
     print(-1)
@@ -12,11 +12,12 @@ print(q)
 prev, curr, total, length = 0, 0, 0, len(food_times)
 while total + (q[0][0] - prev) * length <= k:
     curr = heapq.heappop(q)[0]
+    print((curr - prev) * length)
     total += (curr - prev) * length
     length -= 1
     prev = curr
 q.sort(key = lambda x:x[1])
-print(q[(k - total) % length][1])
+print('answer ',q[(k - total) % length][1])
 
 # 땡
 # for i in range(k):
