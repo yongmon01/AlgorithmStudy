@@ -1,4 +1,4 @@
-# 1339번
+# 1339번 gold4
 
 n = int(input())
 words = []
