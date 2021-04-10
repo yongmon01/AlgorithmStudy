@@ -15,10 +15,12 @@ for i in range(n+1):
         continue
     t = time[i]
     p = point[i]
+    if dp[i] == 0 and i != 0:
+        dp[i] = max(dp[:i])
     if i + t <= n:
         dp[i+t] = max(dp[i+t], dp[i] + p)
 
-print(max(dp))
+print(dp)
 
 
 # n = int(input())
