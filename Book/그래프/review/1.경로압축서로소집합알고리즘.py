@@ -31,6 +31,7 @@ for i in range(m):
     p, q = map(int, input().split())
     union_parent(parent, p, q)
 
+print(parent)
 ##
 for i in parent:
     print(find_parent(parent, i), end=' ')
