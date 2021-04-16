@@ -41,3 +41,37 @@ else:
 # 1 3
 # 2 3
 # 2 4
+
+# 다익스트라 풀이
+# import sys
+# from collections import deque
+# input = sys.stdin.readline
+# n, m, k, x = map(int, input().split())
+# # 도시 도로 거리 출발
+#
+# graph = [[] for _ in range(n+1)]
+# for i in range(m):
+#     a, b = map(int, input().split())
+#     graph[a].append(b)
+#
+# # print(graph)
+# distance = [int(1e9)] * (n+1)
+# distance[x] = 0
+#
+# q = deque()
+# q.append((0, x))
+# while q:
+#     d1, n1 = q.popleft()
+#     if d1 < distance[n1]:
+#         continue
+#     for i in graph[n1]:
+#         if d1 + 1 < distance[i]:
+#             distance[i] = d1 + 1
+#             q.append((distance[i], i))
+#
+# if k not in distance:
+#     print(-1)
+# else:
+#     for i in range(n+1):
+#         if distance[i] == k:
+#             print(i)
