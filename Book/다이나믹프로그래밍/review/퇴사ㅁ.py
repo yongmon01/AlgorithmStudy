@@ -1,40 +1,25 @@
-# n = int(input())
-# t=[0]*n;p=[0]*n
-# for i in range(n):
-#     t[i],p[i]=map(int,input().split())
-# d = [0]*(n+1)
-# for i in range(n+1):
-#     print(d)
-#     for j in range(i):
-#         if j+t[j] <= i and d[j] + p[j] >= d[i]:
-#             d[i] = d[j] + p[j]
-# print(d[n])
-
+# dp 풀이
 n = int(input())
 time = []
-point = []
+earn = []
+dp = [0] * (n + 1)
 for i in range(n):
-    t, p = map(int, input().split())
+    t, e = map(int, input().split())
     time.append(t)
-    point.append(p)
-#
-# print(time)
-# print(point)
+    earn.append(e)
 
-dp = [0] * (n+1)
 for i in range(n+1):
-    if i == n:
-        continue
-    t = time[i]
-    p = point[i]
-    if dp[i] == 0 and i != 0:
-        dp[i] = max(dp[:i])
-    if i + t <= n:
-        dp[i+t] = max(dp[i+t], dp[i] + p)
+    for j in range(i):
+        if j + time[j] <= i:
+            dp[i] = max(dp[i], dp[j] + earn[j])
 
-print(dp)
+# print(time)
+# print(earn)
+# print(dp)
+print(max(dp))
 
 
+# 재귀 풀이
 # n = int(input())
 # time = []
 # point = []
