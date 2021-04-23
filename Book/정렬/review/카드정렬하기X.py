@@ -1,5 +1,5 @@
 # 너무 단순히 생각했다.. 30 30 40 50 에서 30 와 30 을 더한 60 은 가장 크므로 맨뒤로 가야함..
-# n = int(input()) 틀린 풀이 무조건 리스트 앞에서 부터 계산하는 풀이.
+# n = int(input()) 틀린 풀이 <- 무조건 리스트 앞에서 부터 계산하는 풀이.
 # numbers = []
 # for i in range(n):
 #     numbers.append(int(input()))
