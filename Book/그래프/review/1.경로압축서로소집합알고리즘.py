@@ -32,8 +32,14 @@ for i in range(m):
     union_parent(parent, p, q)
 
 print(parent)
-##
-for i in parent:
-    print(find_parent(parent, i), end=' ')
 
+# 아 이건 틀림...
+# for i in parent:
+#     print(find_parent(parent, i), end=' ')
+
+# 이게 맞음..
+for i in range(1, len(parent)):
+    print(find_parent(parent, i), end =' ')
+
+print()
 print(parent)
