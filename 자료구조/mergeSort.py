@@ -1,3 +1,5 @@
+# 머지소트 top down 하향식 return 있는 식.
+
 def merge(list1, list2):
     i = 0
     j = 0
