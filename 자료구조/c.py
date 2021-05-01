@@ -1,5 +1,8 @@
 def merge_sort(my_list):
 
+    if len(my_list) < 2:
+        return
+
     i = 1
     while i < len(my_list):
         j = 0
@@ -8,18 +11,16 @@ def merge_sort(my_list):
             j += 2 * i
         i += i
 
-
 def merge(my_list, i, j):
 
-    left = my_list[j:j+i]
-    right = my_list[j+i: j+2*i]
+    left = my_list[j :j + i]
+    right = my_list[j + i:j + 2 * i]
     l, r, k = 0, 0, j
-
     while l < len(left) and r < len(right):
         if left[l] <= right[r]:
             my_list[k] = left[l]
-            l += 1
             k += 1
+            l += 1
         else:
             my_list[k] = right[r]
             r += 1
@@ -33,6 +34,99 @@ def merge(my_list, i, j):
         my_list[k] = right[r]
         k += 1
         r += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # def merge_sort(my_list):
+# #
+# #     i = 1
+# #     while i < len(my_list):
+# #         j = 0
+# #         while j < len(my_list):
+# #             merge(my_list, i, j)
+# #             j += 2 * i
+# #         i += i
+# #
+# #
+# # def merge(my_list, i, j):
+# #
+# #     left = my_list[j:j+i]
+# #     right = my_list[j+i: j+2*i]
+# #     l, r, k = 0, 0, j
+# #
+# #     while l < len(left) and r < len(right):
+# #         if left[l] <= right[r]:
+# #             my_list[k] = left[l]
+# #             l += 1
+# #             k += 1
+# #         else:
+# #             my_list[k] = right[r]
+# #             r += 1
+# #             k += 1
+# #
+# #     while l < len(left):
+# #         my_list[k] = left[l]
+# #         k += 1
+# #         l += 1
+# #     while r < len(right):
+# #         my_list[k] = right[r]
+# #         k += 1
+# #         r += 1
+# def merge_sort(my_list):
+#     i = 1
+#     while i < len(my_list):
+#         j = 0
+#         while j < len(my_list):
+#             merge(my_list, i, j)
+#             j += 2 * i
+#         i += i
+#
+#
+# def merge(my_list, i, j):
+#     left = my_list[j: j + i]
+#     right = my_list[j + i: j + 2 * i]
+#     l, r, k = 0, 0, j
+#
+#     while l < len(left) and r < len(right):
+#         if left[l] <= right[r]:
+#             my_list[k] = left[l]
+#             k += 1
+#             l += 1
+#         else:
+#             my_list[k] = right[r]
+#             k += 1
+#             r += 1
+#
+#     while l < len(left):
+#         my_list[k] = left[l]
+#         k += 1
+#         l += 1
+#     while r < len(right):
+#         my_list[k] = right[r]
+#         k += 1
+#         r += 1
+#
+#     return
+
 
 d = [6, 8, 3, 9, 10, 1, 2, 4, 7, 5]
 merge_sort(d)

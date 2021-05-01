@@ -5,8 +5,8 @@ def quick_sort(my_list, start, end):
 
     part2 = partition(my_list, start, end)
 
-    quick_sort(my_list, start, part2 - 1)
-    quick_sort(my_list, part2, end)
+    quick_sort(my_list, start, part2-1)
+    quick_sort(my_list,part2, end)
 
 def partition(my_list, start, end):
 
@@ -24,6 +24,52 @@ def partition(my_list, start, end):
             end -= 1
 
     return start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def quick_sort(my_list, start, end):
+#
+#     if start >= end:
+#         return
+#
+#     part2 = partition(my_list, start, end)
+#
+#     quick_sort(my_list, start, part2 - 1)
+#     quick_sort(my_list, part2, end)
+#
+# def partition(my_list, start, end):
+#
+#     middle = (start + end) // 2
+#     pivot = my_list[middle]
+#
+#     while start <= end:
+#         while my_list[start] < pivot:
+#             start += 1
+#         while my_list[end] > pivot:
+#             end -= 1
+#         if start <= end:
+#             my_list[start], my_list[end] = my_list[end], my_list[start]
+#             start += 1
+#             end -= 1
+#
+#     return start
 
 # 테스트 1
 list1 = [1, 3, 5, 7, 9, 11, 13, 11]
