@@ -2,8 +2,7 @@ from collections import deque
 
 
 def solution(board):
-    answer = 0
-    answer = 999999
+    answer = []
     q = deque()
     q.append((0, 0, 4, 0))
 
@@ -17,7 +16,7 @@ def solution(board):
 
         # 마지막에 도달 했을 때 최솟값을 결과에 넣는다.
         if x == len(board) - 1 and y == len(board) - 1:
-            answer = min(answer, c)
+            answer.append(c)
 
         for k in range(len(dx)):
             nx = x + dx[k]
