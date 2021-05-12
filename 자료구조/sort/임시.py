@@ -1,47 +1,38 @@
-def merge_sort(li):
-    if len(li) < 2:
+def quick_sort(my_list, start, end):
+    if start >= end:
         return
-    left = li[:len(li)//2]
-    right = li[len(li)//2:]
 
-    merge_sort(left)
-    merge_sort(right)
+    part2 = partition(my_list, start, end)
+    quick_sort(my_list, start, part2-1)
+    quick_sort(my_list, part2, end)
 
-    merge(li,left,right)
 
-def merge(whole, left, right):
-    i, j = 0, 0
-    k = 0
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            whole[k] = left[i]
-            k += 1
+def partition(my_list, start, end):
+    i, j = start, end
+    pivot = my_list[(start+end)//2]
+
+    while i <= j:
+        while my_list[i] < pivot:
             i += 1
-        else:
-            whole[k] = right[j]
-            k += 1
-            j += 1
-    while i < len(left):
-        whole[k] = left[i]
-        k += 1
-        i += 1
-    while j < len(right):
-        whole[k] = right[j]
-        k += 1
-        j += 1
-    return
+        while my_list[j] > pivot:
+            j -= 1
+        if i <= j:
+            my_list[i], my_list[j] = my_list[j], my_list[i]
+            i += 1
+            j -= 1
+    return i
 
+# 테스트 1
+list1 = [1, 3, 5, 7, 9, 11, 13, 11]
+quick_sort(list1, 0, len(list1) - 1)
+print(list1)
 
-d = [6, 8, 3, 9, 10, 1, 2, 4, 7, 5]
-merge_sort(d)
-print(d)
+# 테스트 2
+list2 = [28, 13, 9, 30, 1, 48, 5, 7, 15]
+quick_sort(list2,0, len(list2) - 1)
+print(list2)
 
-d1 = [1, 3, 5, 7, 9, 11, 13, 11]
-d2 = [28, 13, 9, 30, 1, 48, 5, 7, 15]
-d3 = [2, 5, 6, 7, 1, 2, 4, 7, 10, 11, 4, 15, 13, 1, 6, 4]
-merge_sort(d1)
-merge_sort(d2)
-merge_sort(d3)
-print(d1)
-print(d2)
-print(d3)
+# 테스트 3
+list3 = [2, 5, 6, 7, 1, 2, 4, 7, 10, 11, 4, 15, 13, 1, 6, 4]
+quick_sort(list3, 0, len(list3) - 1)
+print(list3)
